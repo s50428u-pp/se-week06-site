@@ -3,29 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>こんにちは</title>
+    <title>自己紹介</title>
     <style>
+        /* 基本スタイル・スマホ対応 */
         body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-family: sans-serif;
-            background-color: #f8fafc;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f9f9f9;
         }
-        h1 {
-            font-size: 3rem;
-            color: #1e293b;
-            animation: fadeIn 1s ease-out;
+        header {
+            padding: 40px 0 20px;
+            text-align: center;
+            border-bottom: 2px solid #007bff;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        h1 { font-size: 2rem; color: #1e293b; margin-bottom: 10px; }
+        section {
+            background: #fff;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
+        h2 { color: #007bff; font-size: 1.4rem; margin-bottom: 15px; border-left: 4px solid #007bff; padding-left: 10px; }
+        .filter-btn {
+            background: #eee; border: none; padding: 6px 12px; margin-right: 5px; margin-bottom: 15px; cursor: pointer; border-radius: 4px;
+        }
+        .filter-btn.active { background: #007bff; color: #fff; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 15px; }
+        .work-title { font-weight: bold; font-size: 1.1rem; color: #222; }
+        .work-desc { color: #666; font-size: 0.95rem; margin-top: 5px; }
+        .hidden { display: none; }
+        footer { text-align: center; color: #aaa; font-size: 0.8rem; padding: 20px 0; }
     </style>
 </head>
 <body>
-    <h1>こんにちは</h1>
+
+    <header>
+        <h1>scKuの自己紹介</h1>
+    </header>
+
+    <main>
+        <section id="interests">
+            <h2>関心分野・学んでいること</h2>
+            <p>コンピューターサイエンスについて興味があり、データ構造とアルゴリズムやソフトウェア工学などを学んでいる。</p>
+            <br>
+            <p></p>
+        </section>
+
+        <section id="works">
+            <h2>授業の成果物</h2>
+            
+            <div>
+                <button class="filter-btn active" onclick="filter('all', this)">すべて</button>
+                <button class="filter-btn" onclick="filter('cat1', this)">プログラミング</button>
+                <button class="filter-btn" onclick="filter('cat2', this)">設計・レポート</button>
+            </div>
+
+            <ul>
+                <li class="item" data-cat="cat1">
+                    <div class="work-desc">今回は、geminiにサイトの基本的なフォーマットを作成してもらい、フォーマットを埋める形で自己紹介を作成した。</div>
+                    <div class="work-desc">タイトル、自分の関心分野・学んでいること、授業で作った成果物への説明といった構成で作成した。</div>
+                </li>
+
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Portfolio.</p>
+    </footer>
+
+    <script>
+        function filter(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.item').forEach(item => {
+                const isMatch = cat === 'all' || item.getAttribute('data-cat') === cat;
+                item.classList.toggle('hidden', !isMatch);
+            });
+        }
+    </script>
+
 </body>
 </html>
